@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		/* CSS Document */
+		*{padding: 0;margin: 0;}
+		ul li{list-style: none;}
+		/*分页内容*/
+		.page-con ul{display: none;}
+		/*分页*/
+		#pageGro{ width:400px; height:25px; margin:0px auto; padding-top:30px;}
+		#pageGro div,#pageGro div ul li{ font-size:12px; color:#999; line-height:23px; float:left; margin-left:5px;}
+		#pageGro div ul li{ width:22px; text-align:center; border:1px solid #999; cursor:pointer;}
+		#pageGro div ul li.on{ color:#fff; background:#3c90d9; border:1px solid #3c90d9;}
+		#pageGro .pageUp,#pageGro .pageDown{ width:63px; border:1px solid #999; cursor:pointer;}
+/* 		#pageGro .pageUp{ text-indent:23px; background:url(../images/pageUp.png) 5px 7px no-repeat;} */
+/* 		#pageGro .pageDown{ text-indent:5px; background:url(../images/pageDown.png) 46px 6px no-repeat;} */
+	</style>
+</head>
+<body>
+	<ul id="serial_list"></ul><br/>
+	<!--分页-->
+	<div id="pageGro" class="cb">
+	
+		<div class="pageUp">上一页</div>
+	    <div class="pageList">
+	        <ul>
+	            <li class="on">1</li>
+	            <li>2</li>
+	            <li>3</li>
+	            <li>4</li>
+	            <li>5</li>
+	        </ul>
+	    </div>
+	    <div class="pageDown">下一页</div>
+	</div>
+	<!--END 分页-->
+	<!-- <script src="js/jquery.js"></script> -->
+	<script src="https://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+	<script>
+		$(function(){
+			var pagination = {
+				pageOne: 1, //当前显示的页数
+				pagesize: 5, //每页显示条数
+				parentUl: $("#pageList ul"),
+				template: function(data,pageCount,pageList){
+					var  str = '',
+					     d = data.data;
+					if (this.pageOne == pageCount) {
+						for(var i = (this.pageOne-1)*(this.pagesize);i<d.rows.length;i++){
+							str += '<li><input type="radio" name="list" value="'+d.rows[i].title+'" />'+d.rows[i].title+'</li>';
+						}
+					} else {
+						for(var j = (this.pageOne-1)*(this.pagesize);j< this.pageOne*this.pagesize;j++){
+							str += '<li><input type="radio" name="list" value="'+d.rows[j].title+'" />'+d.rows[j].title+'</li>';
+						}
+					}
+					$("#serial_list").html(str);
+				},
+				page_icon: function(cPage,count,eq,parentUl){
+					//根据当前选中页生成页面点击按钮
+					var ul_html = '';
+					for(var i=cPage;i<=count;i++){
+						ul_html += '<li>'+i+'</li>';
+					}
+					$("#pageGro ul").html(ul_html);
+					$("#pageGro ul li").eq(eq).addClass("on");
+				},
+				//点击跳转页面显示的数据
+				pageGroup: function(pageNum,pageCount){
+					switch(pageNum){
+						case 1:
+							this.page_icon(1,5,0);
+						break;
+						case 2:
+							this.page_icon(1,5,1);
+						break;
+						case pageCount-1:
+							this.page_icon(pageCount-4,pageCount,3);
+						break;
+						case pageCount:
+							this.page_icon(pageCount-4,pageCount,4);
+						break;
+						default:
+							this.page_icon(pageNum-2,pageNum+2,2);
+						break;
+					}
+				},
+				pageUp: function(pageNum,pageCount){
+					switch(pageNum){
+						case 1:
+						break;
+						case 2:
+							this.page_icon(1,5,0);
+						break;
+						case pageCount-1:
+							this.page_icon(pageCount-4,pageCount,2);
+						break;
+						case pageCount:
+							this.page_icon(pageCount-4,pageCount,3);
+						break;
+						default:
+							this.page_icon(pageNum-2,pageNum+2,1);
+						break;
+					}
+				},
+				pageDown: function(pageNum,pageCount){
+					switch(pageNum){
+						case 1:
+							this.page_icon(1,5,1);
+						break;
+						case 2:
+							this.page_icon(1,5,2);
+						break;
+						case pageCount-1:
+							this.page_icon(pageCount-4,pageCount,4);
+						break;
+						case pageCount:
+						break;
+						default:
+							this.page_icon(pageNum-2,pageNum+2,3);
+						break;
+					}
+				},
+				init: function(){
+					var _this = this;
+					$.ajax({
+						url: 'data/page.json',
+						type: 'post',
+						dataType: 'json'
+					})
+					.done(function(data) {
+						if (data.error_code == 0) {
+							//根据总页数判断，如果小于5页，则显示所有页数，如果大于5页，则显示5页。根据当前点击的页数生成
+							//总页数
+							var pageAll = data.data.count; //总条数
+							var pageCount = Math.ceil(pageAll/_this.pagesize);
+							if(pageCount>5){
+								_this.page_icon(1,5,0);
+							}else{
+								_this.page_icon(1,pageCount,0);
+							}
+							_this.template(data,pageCount); //默认显示的数据
+							//点击页码
+							$("body").on('click', '#pageGro li', function() {
+								if (pageCount > 5) { //总页数大于5页的时候
+									var pageNum = parseInt($(this).html());//获取当前页数
+									_this.pageGroup(pageNum,pageCount);
+
+									var index = $(this).text();
+									_this.pageOne = index;
+									var pageList = (_this.pageOne-1)*(_this.pagesize); 
+									_this.template(data,pageCount);
+								} else {
+									var index = $(this).text();
+									_this.pageOne = index;
+									_this.template(data,pageCount);
+
+									$(this).addClass("on").siblings("li").removeClass("on");
+								}
+							});
+
+							//点击上一页
+							$("#pageGro .pageUp").click(function(){
+								if(pageCount > 5){
+									var pageNum = parseInt($("#pageGro li.on").html());//获取当前页
+									_this.pageUp(pageNum,pageCount);
+									var index = $("#pageGro ul li.on").index();//获取当前页
+									if(index>0){
+										_this.pageOne -= 1;
+										_this.template(data,pageCount);
+									}else{
+										_this.pageOne = 1;
+										_this.template(data,pageCount);
+									}
+
+								}else{
+									var index = $("#pageGro ul li.on").index();//获取当前页
+									if(index > 0){
+										_this.pageOne -= 1;
+										_this.template(data,pageCount);
+										$("#pageGro li").removeClass("on");//清除所有选中
+										$("#pageGro ul li").eq(index-1).addClass("on");//选中上一页
+									}
+								}
+							});
+							
+							//点击下一页
+							$("#pageGro .pageDown").click(function(){
+								if(pageCount > 5){
+									var pageNum = parseInt($("#pageGro li.on").html());//获取当前页
+									_this.pageDown(pageNum,pageCount);
+									if(_this.pageOne != pageCount){
+										var index = $("#pageGro ul li.on").text();//获取当前页
+										_this.pageOne = index;
+										_this.template(data,pageCount);
+									}
+								}else{
+									var index = $("#pageGro ul li.on").index();//获取当前页
+									if(index+1 < pageCount){
+										_this.pageOne = _this.pageOne*1+1;
+										_this.template(data,pageCount);
+										$("#pageGro li").removeClass("on");//清除所有选中
+										$("#pageGro ul li").eq(index+1).addClass("on");//选中上一页
+									}
+								}
+							});
+						}
+					})
+					.fail(function() {
+						console.log("分页数据获取失败");
+					});
+					
+				}
+			};
+			pagination.init();
+		});
+	</script>
+</body>
+</html>

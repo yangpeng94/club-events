@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd"> 
+<hibernate-mapping package="com.yang.entity">  
+     <class name="User" table="user">  
+         <id name="id" type="int">  
+             <column name="id"/>  
+         </id>  
+         <property name="password" type="string">  
+             <column name="password"/>  
+         </property>  
+           
+            <property name="stuno" type="int">  
+             <column name="stuno"/>  
+         </property>
+          <property name="name" type="string">  
+             <column name="name"/>  
+         </property>
+          <property name="img" type="string">  
+             <column name="img"/>  
+         </property>
+          <property name="regtime" type="string">  
+             <column name="regtime"/>  
+         </property>
+          <property name="lastlogtime" type="string">  
+             <column name="lastlogtime"/>  
+         </property> 
+     </class>  
+ 
+     <class name="Activity" table="activity">  
+         <id name="id" type="int">  
+             <column name="id"/>  
+         </id>  
+         <property name="clubname" type="string">  
+             <column name="clubname"/>  
+         </property>  
+         <property name="name" type="string">  
+             <column name="name"/>  
+         </property>  
+         <property name="context" type="string">  
+             <column name="context"/>  
+         </property>  
+         <property name="address" type="string">  
+             <column name="address"/>  
+         </property>  
+         <property name="img" type="string">  
+             <column name="img"/>  
+         </property>  
+         <property name="time" type="string">  
+             <column name="time"/>  
+         </property>  
+         <property name="releasetime" type="string">  
+             <column name="releasetime"/>  
+         </property>  
+         <property name="passtime" type="string">  
+             <column name="passtime"/>  
+         </property> 
+          <property name="flag" type="string">  
+             <column name="flag"/>  
+         </property>   
+         <property name="love" type="string">  
+             <column name="love"/>  
+         </property>   
+            
+     </class>  
+ 
+     <class name="Club" table="club">  
+          <id name="id" type="int">  
+             <column name="id"/>  
+         </id>  
+         <property name="clubno" type="int">  
+             <column name="clubno"/>  
+         </property>  
+         <property name="password" type="string">  
+             <column name="password"/>  
+         </property>  
+         <property name="clubname" type="string">  
+             <column name="clubname"/>  
+         </property>  
+         <property name="natrue" type="string">  
+             <column name="natrue"/>  
+         </property>  
+         <property name="img" type="string">  
+             <column name="img"/>  
+         </property>  
+         <property name="regtime" type="string">  
+             <column name="regtime"/>  
+         </property>  
+         <property name="releasetime" type="string">  
+             <column name="releasetime"/>  
+         </property>  
+         <property name="passtime" type="string">  
+             <column name="passtime"/>  
+         </property> 
+          <property name="flag" type="string">  
+             <column name="flag"/>  
+         </property>    
+            
+     </class>  
+ </hibernate-mapping>  

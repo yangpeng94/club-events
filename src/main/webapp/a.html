@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link href="resources/css/bootstrap.min.css" rel="stylesheet" />
+<link href="resources/css/style.css" rel="stylesheet" />
+</head>
+<body>
+<button class="a" value="">第一个 </button>
+<button class="a" value="">第二个</button>
+<button class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">
+大的模态弹出窗
+</button>
+
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+				<h4 class="modal-title">模态弹出窗标题</h4>
+			</div>
+			<div class="modal-body">
+				<p>模态弹出窗主体内容</p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+				<button type="button" class="btn btn-primary">保存</button>
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+<script src="resources/js/jquery.min.js"></script>
+<script src="resources/js/bootstrap.js"></script>
+<!-- <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>  -->
+<script type="text/javascript">
+$(function() {
+	debugger;
+	$(".a").click(function(){
+		debugger;
+		$(this).val(parseInt($(this).val()) +1);
+	});
+});
+
+</script>
+</html>

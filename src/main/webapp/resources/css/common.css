@@ -1,0 +1,12 @@
+@CHARSET "UTF-8";
+.alert-error,.alert-success{
+	text-align:center;
+	vertical-align:60px;
+	font-size:16px; 
+	position: fixed;
+	display: none;
+	right: 10px;
+	bottom: 10px;
+	width: 300px;
+	height: 60px;
+}

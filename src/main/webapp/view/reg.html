@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>系统注册</title>
+<link href="../resources/css/common.css" rel="stylesheet" />
+<link href="../resources/css/bootstrap.min.css" rel="stylesheet" />
+<link href="../resources/css/style.css" rel="stylesheet" />
+<link href="../resources/css/zyUpload.css" rel="stylesheet" />
+<style type="text/css">
+body {
+	/* background:red; */
+	background: url(../resources/img/2.jpg) no-repeat;
+}
+
+input:focus {
+	outline: none;
+}
+
+#index {
+	background: #5bc0de;
+	height: 70%;
+	width: 30%;
+	position: relative;
+	float: right;
+	border-radius: 5px;
+	top: 50px;
+	right: 35%;
+	opacity: 0.9;
+}
+
+#index  ul {
+	opacity: 0.7;
+	height: 60px;
+	/* 	margin: 0px auto; */
+	/* 	padding-left: 95px; */
+	/* 	margin-top: 10px; */
+	/* 	margin-bottom: 10px; */
+}
+
+#index  ul li {
+	cursor: pointer;;
+	width: 49.5%;
+	height: 60px;
+	background: #5bc0de;
+}
+
+#index  ul li a {
+	font-family: cursive;
+	font-size: 28px;
+	color: white;
+	text-align: center;
+	vertical-align: middle;
+}
+
+#index  .tab .tab2 button {
+	background: #c0c0c0;
+	border-color: #c0c0c0
+}
+
+#index  .tab, #index  .tab .tab1, #index  .tab .tab2, #index  .tab .tab3
+	{
+	background: white;
+	height: 600px;
+	width: 100%;
+	border-radius: 5px;
+	top: 0px;
+	left: 0px;
+}
+
+.tab {
+	overflow: hidden;
+}
+
+#index  .tab span {
+	margin-left: 50px;
+	font-family: monospace;
+	font-size: 18px;
+	margin-top: 30px;
+}
+
+#index  .tab label {
+	font-family: monospace;
+	font-size: 18px;
+	margin-top: 30px;
+	width: 90px;
+}
+
+#index  .tab input, #index  .tab select {
+	background: #F0F0F0;
+	width: 220px;
+	font-size: 18px;
+	border-radius: 5px;
+	height: 40px;
+	margin-left: 5px;
+	margin-top: 30px
+}
+
+#index  .tab button {
+	margin-left: 25%;
+	width: 50%;
+	margin-top: 7%;
+}
+
+.nav-pills>li.active>a, .nav-pills>li.active>a:hover, .nav-pills>li.active>a:focus
+	{
+	color: #fff;
+	background-color: #222;
+}
+
+.tab img {
+	width: 100px;
+	height: 100px;
+	border-radius: 50%;
+	margin-top: 50px;
+	margin-left: 200px;
+}
+
+#index .tab .icon-checkmark, #index .tab .icon-cross {
+	width: 10px;
+	height: 10px;
+	float: right;
+	margin-top: 43px;
+	margin-right: 20px
+}
+</style>
+</head>
+<body>
+<div id="index">
+			<ul class="nav nav-pills">
+				<li class="active"><a>学生注册</a></li>
+				<li><a>社团注册</a></li>
+				
+			</ul>
+			<div class="tab">
+				<div class="tab1">
+				<form action="../insertstu.do" method="post">
+					<a  data-toggle="modal" data-target=".imgmodal" >
+					<input  type="hidden" name="img">
+<!-- 					<input class="formimg" type="image" src="../resources/img/3.jpg" id="stuimg" name="img"> -->
+					<img alt="" src="../resources/img/3.jpg" id="stuimg">
+					</a>
+                <br>
+				<span class="icon-user"> <label>学生账号:</label>
+					</span> <input type="text" name="stuno" /> <br> 
+					<span class="icon-key"> <label>密码:</label>
+					</span> <input  type="text" name="password" />
+					<br> <span
+						class="icon-key"> <label>确认密码:</label>
+					</span> <input  type="text" name="checkpassword" />
+					<div class="icon-checkmark" ></div>
+					<div class="icon-cross"></div>
+					
+					<br> <span
+						class="icon-profile"> <label>学生姓名:</label>
+					</span> <input  type="text" name="name" />
+					<a href="#">
+					<button type="submit" class="btn btn-info btn-lg active">学生注册</button>
+					</a>
+					</form>
+				</div>
+				
+				<div class="tab2">
+				<form action="../insertclub.do" method="post">
+				<a data-toggle="modal" data-target=".imgmodal">
+				<img alt="" src="../resources/img/3.jpg" id="clubimg" >
+				<input  type="hidden" name="img">
+				</a>
+					<br>
+					<span class="icon-user"> <label>社团账号:</label>
+					</span> <input type="text" name="clubno" /> <br> <span
+						class="icon-key"> <label>密码:</label>
+					</span> <input  type="text" name="cpassword" />
+					<br> <span
+						class="icon-key"> <label>确认密码:</label>
+					</span> <input  type="text" name="ccheckpassword"/>
+					<div class="icon-checkmark" ></div>
+					<div class="icon-cross"></div>
+					<br> <span
+						class="icon-profile"> <label>社团姓名:</label>
+					</span> <input  type="text" name="clubname" />
+					<br> <span
+						class="icon-pacman"> <label>社团性质:</label>
+					</span> 
+					
+					  <select name="natrue"> 
+					    <option value="文学">文学</option> 
+					    <option value="体育">体育</option> 
+					    <option value="公益">公益</option> 
+					    <option value="娱乐">娱乐</option> 
+					    <option value="话剧">话剧</option> 
+					    </select>
+					
+<!-- 					<input  type="text" name="natrue" /> -->
+					<a href="#">
+					<button type="submit" class="btn btn-warning btn-lg active">社团注册</button>
+					</a>
+					</form>
+				</div>
+			</div>
+	</div>
+	
+	
+	
+	
+	<div class="modal fade imgmodal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+				<h4 class="modal-title">学生头像</h4>
+			</div>
+			<div class="modal-body">
+			<div id="demo" class="demo"></div>
+<!-- 				<p>模态弹出窗主体内容</p> -->
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+<!-- 				<button type="button" class="btn btn-primary">保存</button> -->
+			</div>
+		</div>
+	</div>
+</div>
+
+</body>
+<script src="../resources/js/jquery.min.js"></script>
+<script src="../resources/js/bootstrap.js"></script>
+<script src="../resources/js/zyFile.js"></script>
+<script src="../resources/js/zyUpload.js"></script>
+<script src="../resources/js/jq22.js"></script>
+<script>
+$(function() {
+	$(".icon-checkmark,.icon-cross").css("display","none");
+// 	$(".icon-cross").css("display","none");
+	$(".nav li").mouseover(function() {
+// 		debugger;
+			$(this).addClass("active").siblings().removeClass("active");
+			$(".tab>div").hide().eq($(this).index()).show();
+		});
+	$("input").focusin(function(){
+		$(this).css("background","white");
+	}).focusout(function(){
+		$(this).css("background","#F0F0F0");
+	});
+	$("#index ul li:eq(0)").mouseover(function(){
+		$("#index ").css("background","#5bc0de");
+		$("#index  .tab .tab1").css("background","white");
+	});
+	$("#index ul li:eq(1)").mouseover(function(){
+		$("#index ").css("background","#c0c0c0");
+		$("#index .tab .tab2").css("background","white");
+	});
+// 	$(".clubmodal .upload_btn").click(function(){
+// 		$('.clubmodal').modal('hide');
+// 	});
+// debugger;
+var currentId,currentSrc;
+$("input[name=img]").val($(".tab img").attr('src').substring(17, 22));
+    $("img").click(function(){
+    	currentId = $(this).attr('id');
+    	currentSrc = $(this).attr('src');
+	});
+	$(".upload_btn").click(function(){
+		$('.imgmodal').modal('hide');
+	});
+	$('.imgmodal').on('hide.bs.modal', function () {
+		debugger;
+		if($("#haha").val()==null||$("#haha").val()==''){
+			$("#"+currentId).attr('src',currentSrc); 
+			$("input[name=img]").val(currentSrc);
+		}else{
+			$("#"+currentId).attr('src',"../resources/images/upload/"+$("#haha").val()); 
+			$("input[name=img]").val($("#haha").val());
+		}
+	});
+	$("input[name=checkpassword]").keyup(function(){
+// 		debugger;
+		if($("input[name=password]").val()==$(this).val()){
+			$(".tab1 .icon-checkmark").css("display","block");
+			$(".tab1 .icon-cross").css("display","none");
+			$('.tab1 button').prop('disabled',false);
+		}else{
+			$(".tab1 .icon-cross").css("display","block");
+			$(".tab1 .icon-checkmark").css("display","none");
+			$('.tab1 button').prop('disabled',true);
+		}
+	});
+	$("input[name=ccheckpassword]").keyup(function(){
+// 		debugger;
+		if($("input[name=cpassword]").val()==$(this).val()){
+			$(".tab2 .icon-checkmark").css("display","block");
+			$(".tab2 .icon-cross").css("display","none");
+			$('.tab2 button').prop('disabled',false);
+		}else{
+			$(".tab2 .icon-cross").css("display","block");
+			$(".tab2 .icon-checkmark").css("display","none");
+			$('.tab2 button').prop('disabled',true);
+		}
+	});
+});
+</script>
+</html>
